@@ -14,6 +14,8 @@
     border-bottom: 1px solid #30363D;
 }
 
+/****/
+
 .LeftComponent{
     height: 100%;
     width: 70%;
@@ -27,7 +29,7 @@
     height: 50%;
     padding-left: 2rem;
     padding-top: 0.7rem;
-    font-size: 2.2rem;
+    font-size: 2rem;
 }
 
 .LeftComponent .UserComponent{
@@ -39,15 +41,12 @@
     padding-left: 2rem;
 }
 
-
-
 .LeftComponent .UserComponent .ConfigButton{
     background-color: rgb(0, 0, 0);
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 2.2rem;
+    width: 2.2rem;
     border: 1px solid #30363D;
     border-radius: 4px;
-
 }
 
 .LeftComponent .UserComponent .ConfigButton .Icon{
@@ -55,38 +54,35 @@
     height: 60%;
 }
 
-
 .LeftComponent .UserComponent .UserName{
-    font-size: 1.4rem;
+    font-size: 1rem;
     margin-left: 0.6rem;
 }
 
 
-
-
+/*****/
 
 .RightComponent{
     height: 90%;
     width: 30%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 
 
 .RightComponent button{
-    width: 7rem;
-    height: 2.5rem;
+    width: 23vw;
+    height: 4.5vh;
     border: none;
     border-radius: 4px;
+    font-size: 0.8rem;
 }
 
 .RightComponent .MyListsButton{
     background-color: #000000;
     border: 1px solid #30363D;
-    
-
 }
 
 .RightComponent .NewListButton{
@@ -94,28 +90,5 @@
     font-weight: bold;
 }
 
-
-
-
-
-/* <div className="NavBar">
-<div className="LeftComponent">
-    <h1 className="AppTitle">LIBRARIUM</h1>
-    <div className="UserComponent">
-        <button className="ConfigButton">
-            X
-        </button>
-        <p className="UserName"> Amylos</p>
-    </div>
-</div>
-<div className="RightComponent">
-    <button className="MyListsButton">
-        My Lists
-    </button>
-    <button className="NewListButton">
-        New List
-    </button>
-</div>
-</div> */
 
 
