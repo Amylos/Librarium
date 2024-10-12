@@ -1,0 +1,121 @@
+
+/* 0D1117 */
+/* 30363D */
+/* 000000 */
+/* FFFFFF */
+
+.NavBar{
+    width: 100%;
+    height: 14%;
+    background-color: #0D1117;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #30363D;
+}
+
+.LeftComponent{
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.LeftComponent h1{
+    width: 100%;
+    height: 50%;
+    padding-left: 2rem;
+    padding-top: 0.7rem;
+    font-size: 2.2rem;
+}
+
+.LeftComponent .UserComponent{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: start space-around;
+    align-items: center;
+    padding-left: 2rem;
+}
+
+
+
+.LeftComponent .UserComponent .ConfigButton{
+    background-color: rgb(0, 0, 0);
+    height: 2.5rem;
+    width: 2.5rem;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+
+}
+
+.LeftComponent .UserComponent .ConfigButton .Icon{
+    width: 60%;
+    height: 60%;
+}
+
+
+.LeftComponent .UserComponent .UserName{
+    font-size: 1.4rem;
+    margin-left: 0.6rem;
+}
+
+
+
+
+
+.RightComponent{
+    height: 90%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.RightComponent button{
+    width: 7rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 4px;
+}
+
+.RightComponent .MyListsButton{
+    background-color: #000000;
+    border: 1px solid #30363D;
+    
+
+}
+
+.RightComponent .NewListButton{
+    background-color: #28A745;
+    font-weight: bold;
+}
+
+
+
+
+
+/* <div className="NavBar">
+<div className="LeftComponent">
+    <h1 className="AppTitle">LIBRARIUM</h1>
+    <div className="UserComponent">
+        <button className="ConfigButton">
+            X
+        </button>
+        <p className="UserName"> Amylos</p>
+    </div>
+</div>
+<div className="RightComponent">
+    <button className="MyListsButton">
+        My Lists
+    </button>
+    <button className="NewListButton">
+        New List
+    </button>
+</div>
+</div> */
+
+
