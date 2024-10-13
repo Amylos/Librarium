@@ -1,3 +1,276 @@
+
 .ListMaker{
-    
+    width: 100%;
+    height: 86%;
+}
+
+.ListMaker .Header{
+    width: 100%;
+    height: 12%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ListMaker .Header h2{
+    width: 44%;
+    height: 55%;
+    font-size: 1.1rem;
+    background-color: #0D1117;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.ListMaker .Section{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+
+.ListMaker .ListName{
+    width: 64%;
+    height: 8%;
+    font-size: 1.1rem;
+    background-color: #0D1117;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+
+
+/****/
+/* .Format{
+    background-color: green;
+    width: 64%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
+
+.ArmyIdentity{
+    width: 64%;
+    height: 8%;
+    font-size: 1.1rem;
+    background-color: #0D1117;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    margin-top: 10px;
+    text-align: center;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ListMaker .Format{
+    width: 64%;
+    height: 8%;
+    font-size: 1.1rem;
+    background-color: #0D1117;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    margin-top: 10px;
+    text-align: center;
+    z-index: 1000;
+}
+
+.ListMaker .FormatList{
+    width: 54%;
+    height: 23%;
+    font-size: 1.1rem;
+    background-color: #0D1117;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 10px;
+    margin-top: -5px;
+    /* display: none; */
+}
+
+.ListMaker .FormatList li{
+    width: 70%;
+    height: 20%;
+    background-color: #000000;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+
+/***/
+
+.ListMaker .Faction{
+    width: 64%;
+    height: 8%;
+    font-size: 1.1rem;
+    background-color: #0D1117;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    margin-top: 10px;
+    text-align: center;
+    z-index: 1;
+}
+
+.ListMaker .FactionList{
+    width: 54%;
+    height: 23%;
+    font-size: 1.1rem;
+    background-color: #0D1117;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 10px;
+    margin-top: -5px;
+    display: none;
+}
+
+
+.ListMaker .FactionList li{
+    width: 70%;
+    height: 20%;
+    background-color: #000000;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+
+.ListMaker .ArmyList{
+    width: 54%;
+    height: 23%;
+    font-size: 1.1rem;
+    background-color: #0D1117;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 10px;
+    margin-top: -5px;
+    /* display: none; */
+}
+
+.ListMaker .ArmyList li{
+    width: 70%;
+    height: 20%;
+    background-color: #000000;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+
+.ListMaker .RaceList{
+    width: 54%;
+    height: 23%;
+    font-size: 1.1rem;
+    background-color: #0D1117;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 10px;
+    margin-top: -5px;
+    /* display: none; */
+}
+
+.ListMaker .RaceList li{
+    width: 70%;
+    height: 20%;
+    background-color: #000000;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+
+.ListMaker .DetachementList{
+    width: 54%;
+    height: 23%;
+    font-size: 1.1rem;
+    background-color: #0D1117;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 10px;
+    margin-top: -5px;
+    /* display: none; */
+
+}
+.ListMaker .DetachementList li{
+    width: 70%;
+    height: 20%;
+    background-color: #000000;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+
+
+.CreateButton{
+    position: absolute;
+    bottom: 2rem;
+    background-color: #28A745;
+    border-radius: 4px;
+    font-weight: bold;
+    border: none;
+    z-index: 11;
+    width: 23%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+
+
 }

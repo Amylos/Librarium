@@ -1,5 +1,8 @@
 import { useState,useEffect } from "react";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
 import '../styles/Main.css'
 
 
@@ -46,40 +49,18 @@ const lists = [
 
 ]
 
-
-
     return (
         <div className="Main">
             <div className="Header">
                 <h2>Players lists</h2>
                 <div className="Filter">
+                </div>
             </div>
-        </div>
         <div className="Section">
             {
-            lists.map((list)=>{
+            lists.map((list, index)=>{
                 return(
-                    <div className="ArmyList">
-                        <div className="Left">
-                            <div className="Faction">
-                                Nécron
-                            </div>
-                            <div className="Points">
-                                2000 points
-                            </div>
-                        </div>
-                        <div className="Center">
-                            <div className="ArmyName">
-                                Les clodos de bégon
-                            </div>
-                            <div className="Author">
-                                Andrew la chips
-                            </div>
-                        </div>
-                        <div className="Right">
-                            <button className="Favoris">X</button>
-                        </div>
-                    </div>
+                  <ArmyList key ={index}/>
                     )
                 })
             }
@@ -90,3 +71,34 @@ const lists = [
 }
 
 export default Main;
+
+
+
+
+const ArmyList = () =>{
+    return(
+        <div className="ArmyList">
+            <div className="Left">
+                <div className="Faction">
+                    Faction
+                </div>
+                <div className="Points">
+                    2000 points
+                </div>
+            </div>
+            <div className="Center">
+                <div className="ArmyName">
+                    Army Name
+                </div>
+                <div className="Author">
+                    Author
+                </div>
+            </div>
+            <div className="Right">
+                <button className="Favoris">
+                <FontAwesomeIcon className="Icon" icon={faStar} />
+                </button>
+            </div>
+        </div>
+    )
+}
