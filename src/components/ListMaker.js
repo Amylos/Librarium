@@ -28,13 +28,13 @@ const factions = {
       { name: 'Chaos Daemons', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
     ],
     xenos: [
-        { name: 'Aeldari', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-        { name: 'Drukhari', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-        { name: 'Orks', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-        { name: 'Necrons', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-        { name: 'T\'au', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-        { name: 'Tyranids', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-        { name: 'Genestealer Cults', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
+        { name: 'Aeldari', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
+        { name: 'Drukhari', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
+        { name: 'Orks', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
+        { name: 'Necrons', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
+        { name: 'T\'au', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
+        { name: 'Tyranids', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
+        { name: 'Genestealer Cults', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
       ]
   };
 
@@ -42,18 +42,27 @@ const factions = {
 const ListMaker = () =>{
 
 
-    const [sectionToShow,setSectionToShow] = useState("ArmyList");
+    const [sectionToShow,setSectionToShow] = useState("FactionList");
 
 
 
     const [name, setName] = useState('');
     const [format, setFormat] =useState(null);
+    const [previousFormat, setPreviousFormat] =useState(null);
+
 
     const [selectedFaction, setSelectedFaction] = useState('');
     const [selectedRace, setSelectedRace] = useState('');
     const [selectedDetachement, setSelectedDetachement] = useState('');
 
-
+    const HandleChangeFormat = () =>{
+        if(format){
+            setFormat(null);
+        }
+        else{
+            setFormat(previousFormat);
+        }
+    }
     const handleFactionChange = (race) => {
         setSelectedFaction(race);
         setSelectedRace(''); // Réinitialiser la race lorsque la faction change
@@ -70,6 +79,19 @@ const ListMaker = () =>{
         setSectionToShow('Validate'); // Aller à la validation
     };
 
+    const ChangeFaction = () =>{
+        setSectionToShow('FactionList');
+        setSelectedFaction('');
+        setSelectedRace('');
+        setSelectedDetachement('');
+    }
+
+    const ChangeArmy = () =>{
+        setSectionToShow('RaceList');
+        setSelectedRace('');
+        setSelectedDetachement('');
+    }
+
 
     return (
         <div className="ListMaker">
@@ -82,35 +104,35 @@ const ListMaker = () =>{
 
                 <input className="ListName" type="text" placeholder="List Name" onChange={(e) =>{setName(e.target.value)}} value={name}></input>
 
-                    <button className="Format" onClick={() =>{setFormat(null)}}>{format !== null ? format + " points" : "Format"}</button>
+                    <button className="Format" onClick={() =>{HandleChangeFormat()}}>{format !== null ? format + " points" : "Format"}</button>
                     {
                         format === null ?
                         <ul className="FormatList" style={{ visibility: format === null ? 'visible' : 'hidden' }}>
-                            <li role='button' onClick={() =>{setFormat(500)}}>500</li>
-                            <li role='button' onClick={() =>{setFormat(1000)}}>1000</li>
-                            <li role='button' onClick={() =>{setFormat(2000)}}>2000</li>
-                            <li role='button' onClick={() =>{setFormat(3000)}}>3000</li>
+                            <li role='button' onClick={() =>{setFormat(500); setPreviousFormat(500)}}>500</li>
+                            <li role='button' onClick={() =>{setFormat(1000); setPreviousFormat(1000)}}>1000</li>
+                            <li role='button' onClick={() =>{setFormat(2000); setPreviousFormat(2000)}}>2000</li>
+                            <li role='button' onClick={() =>{setFormat(3000); setPreviousFormat(3000)}}>3000</li>
                         </ul>
                     : null
                     }
 
-                    {selectedFaction && <div className="ArmyIdentity">{selectedFaction.charAt(0).toUpperCase() + selectedFaction.replace('_', ' ').slice(1)}</div>}
-                    {selectedRace && <div className="ArmyIdentity">{selectedRace.charAt(0).toUpperCase() + selectedRace.replace('_', ' ').slice(1)}</div>}
-                    {selectedDetachement && <div className="ArmyIdentity">{selectedDetachement.charAt(0).toUpperCase() + selectedDetachement.replace('_', ' ').slice(1)}</div>}
+                    {selectedFaction && <div  onClick={()=>ChangeFaction()} className="ArmyIdentity">{selectedFaction.charAt(0).toUpperCase() + selectedFaction.replace('_', ' ').slice(1)}</div>}
+                    {selectedRace && <div onClick={()=>ChangeArmy()}  className="ArmyIdentity">{selectedRace.charAt(0).toUpperCase() + selectedRace.replace('_', ' ').slice(1)}</div>}
+                    {selectedDetachement && <div  className="ArmyIdentity">{selectedDetachement.charAt(0).toUpperCase() + selectedDetachement.replace('_', ' ').slice(1)}</div>}
 
-               {
-                !selectedFaction ?
-                    <button className="Faction">Factions</button>
-                :
-                selectedFaction && !selectedRace && !selectedDetachement ?
-                    <button className="Faction">Armies</button>
-                :
-                selectedFaction && selectedRace && !selectedDetachement ?
-                    <button className="Faction">Detachments</button>
-                : null
-               }
-
-                    <ul className="ArmyList" style={{ display: sectionToShow === "ArmyList" ? 'flex' : 'none' }}>
+                    {
+                        !selectedFaction ?
+                            <button className="Faction">Factions</button>
+                        :
+                        selectedFaction && !selectedRace && !selectedDetachement ?
+                            <button className="Faction">Armies</button>
+                        :
+                        selectedFaction && selectedRace && !selectedDetachement ?
+                            <button className="Faction">Detachments</button>
+                        : null
+                    }
+                
+                    <ul className="FactionList" style={{ display: sectionToShow === "FactionList" ? 'flex' : 'none' }}>
                         {
                             Object.keys(factions).map((factionKey) => (
                             <li key={factionKey} onClick={() => {handleFactionChange(factionKey)}}>
@@ -133,6 +155,7 @@ const ListMaker = () =>{
                             null
                         }
                     </ul>
+
                     <ul className="DetachementList" style={{ display: sectionToShow === "DetachementList" ? 'flex' : 'none' }}>
                         {
                             factions[selectedFaction] && selectedRace ? (
@@ -145,7 +168,9 @@ const ListMaker = () =>{
                             : null
                         }
                     </ul>
-       
+
+                    <div className={sectionToShow === "Validate" ? 'Logo' : 'LogoN'}></div>
+
                     <button className="CreateButton" style={{ display: sectionToShow === "Validate" ? 'flex' : 'none' }}>Create</button>
             </div>
         </div>
