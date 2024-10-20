@@ -4,6 +4,7 @@ import NavBar from './components/Navbar';
 import Main from './components/Main';
 import ListMaker from "./components/ListMaker";
 import UserLists from "./components/UserLists";
+import Login from "./components/login";
 
 import './styles/App.css';
 
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <div className="App">
+      {/* <Login/> */}
       <NavBar setComponentToDisplay = {setComponentToDisplay} />
       {components[componentToDisplay] || null}
     </div>

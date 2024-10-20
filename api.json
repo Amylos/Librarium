@@ -14,7 +14,6 @@
         "controle-objectif": 2
     },
     "armes": {
-        "tir": {
             "bolter": {
                 "selected": true,
                 "portee": 24,
@@ -33,18 +32,15 @@
                 "PA": -2,
                 "degats": 1,
                 "capacites": ["Assaut", "Lourd"]
-            }
-        },
-        "corps-a-corps": {
+            },
             "epee-energetique": {
-                "portee": 1,
+                "portee": 0,
                 "attaque": 1,
                 "force": 5,
                 "C/T": 1,
                 "PA": -3,
                 "degats": 1,
                 "capacites": ["A", "D3"]
-            }
         }
     },
     "aptidudes": {
@@ -54,3 +50,4 @@
     "mots-cles": [],
     "optimisations": []
 }
+

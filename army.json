@@ -1,0 +1,20 @@
+[
+
+    {
+        "owner":"Andrew",
+        "name":"Deathwing",
+        "faction":"Space Marines",
+        "point": 2000,
+        "army":"Dark Angels",
+        "detachement":"Gladius",
+        "units": [
+            {
+
+            },
+            {
+
+            }
+        ]
+
+    }
+]

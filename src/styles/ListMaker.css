@@ -84,6 +84,7 @@
     margin-top: 10px;
     text-align: center;
     z-index: 1000;
+    /* box-shadow: 0 0 10px rgba(207, 204, 13, 0.5); */
 }
 
 .ListMaker .FormatList{
@@ -202,6 +203,7 @@
     justify-content: center;
     align-items: center;
     font-size: 12px;
+    
 }
 
 
@@ -239,57 +241,26 @@
 
 
 
-
-.Logo{
-    background-image: url('../images/DarkAngels.png');
-    background-position: 4px -70px;
-    background-repeat: no-repeat;
-    background-size: 90%;
+.ValidateSection{
     width: 100%;
-    height: 35%;
-    margin-top: 1rem;
+    height: 37%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.Logo {
-    background-image: url('../images/DarkAngels.png');
-    background-position: 4px -70px;
-    background-repeat: no-repeat;
-    background-size: 90%;
-    width: 100%;
-    height: 35%;
-    margin-top: 1rem;
-    
-    /* Appliquer l'animation d'apparition */
-    opacity: 0; /* Initialement invisible */
-    animation: fadeIn 2s forwards; /* Animation d'apparition sur 2 secondes */
-    
-    /* Ajout d'une ombre autour des bordures */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre douce */
-    border-radius: 8px; /* Coins arrondis pour un effet plus agréable */
-}
 
-/* Définir l'animation d'apparition */
-@keyframes fadeIn {
-    from {
-        opacity: 0; /* Invisible au début */
-        transform: scale(0.9); /* Légèrement plus petit */
-    }
-    to {
-        opacity: 1; /* Complètement visible */
-        transform: scale(1); /* Revenir à la taille normale */
-    }
-}
 
 .CreateButton{
-    position: absolute;
-    bottom: 1rem;
     background-color: #28A745;
     border-radius: 4px;
     font-weight: bold;
     border: none;
     z-index: 11;
-    width: 23%;
-    height: 5%;
+    width: 23vw;
+    height: 4.5vh;
     display: flex;
     justify-content: center;
     align-items: center;

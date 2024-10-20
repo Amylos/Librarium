@@ -1,0 +1,63 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0D1117;
+  }
+  
+  .form-container {
+    background-color: #1C2128;
+    border: 1px solid #30363D;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .title {
+    color: white;
+    text-align: center;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #30363D;
+    border-radius: 4px;
+    background-color: #0D1117;
+    color: white;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 10px;
+    background-color: #30363D;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #444d56;
+  }
+  
+  /* New styles for the Create Account link */
+  .create-account {
+    color: white;
+    text-align: center;
+    margin-top: 15px; /* Spacing above the link */
+  }
+  
+  .create-account a {
+    color: #009688; /* Color for the link */
+    text-decoration: none; /* No underline */
+  }
+  
+  .create-account a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  

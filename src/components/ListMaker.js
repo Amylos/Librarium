@@ -116,23 +116,23 @@ const ListMaker = () =>{
                     : null
                     }
 
-                    {selectedFaction && <div  onClick={()=>ChangeFaction()} className="ArmyIdentity">{selectedFaction.charAt(0).toUpperCase() + selectedFaction.replace('_', ' ').slice(1)}</div>}
-                    {selectedRace && <div onClick={()=>ChangeArmy()}  className="ArmyIdentity">{selectedRace.charAt(0).toUpperCase() + selectedRace.replace('_', ' ').slice(1)}</div>}
-                    {selectedDetachement && <div  className="ArmyIdentity">{selectedDetachement.charAt(0).toUpperCase() + selectedDetachement.replace('_', ' ').slice(1)}</div>}
+                    {selectedFaction && format && <div  onClick={()=>ChangeFaction()} className="ArmyIdentity">{selectedFaction.charAt(0).toUpperCase() + selectedFaction.replace('_', ' ').slice(1)}</div>}
+                    {selectedRace && format && <div onClick={()=>ChangeArmy()}  className="ArmyIdentity">{selectedRace.charAt(0).toUpperCase() + selectedRace.replace('_', ' ').slice(1)}</div>}
+                    {selectedDetachement  && <div  className="ArmyIdentity">{selectedDetachement.charAt(0).toUpperCase() + selectedDetachement.replace('_', ' ').slice(1)}</div>}
 
                     {
-                        !selectedFaction ?
+                        !selectedFaction && format ?
                             <button className="Faction">Factions</button>
                         :
-                        selectedFaction && !selectedRace && !selectedDetachement ?
+                        selectedFaction && !selectedRace && !selectedDetachement && format ?
                             <button className="Faction">Armies</button>
                         :
-                        selectedFaction && selectedRace && !selectedDetachement ?
+                        selectedFaction && selectedRace && !selectedDetachement && format ?
                             <button className="Faction">Detachments</button>
                         : null
                     }
-                
-                    <ul className="FactionList" style={{ display: sectionToShow === "FactionList" ? 'flex' : 'none' }}>
+
+                    <ul className="FactionList" style={{ display: sectionToShow === "FactionList" && format ? 'flex' : 'none' }}>
                         {
                             Object.keys(factions).map((factionKey) => (
                             <li key={factionKey} onClick={() => {handleFactionChange(factionKey)}}>
@@ -142,7 +142,7 @@ const ListMaker = () =>{
                         }
                     </ul>
 
-                    <ul className="RaceList" style={{ display: sectionToShow === "RaceList" ? 'flex' : 'none'}}>
+                    <ul className="RaceList" style={{ display: sectionToShow === "RaceList" && format ? 'flex' : 'none'}}>
                         {
                             factions[selectedFaction] ? (
                                 factions[selectedFaction].map((faction) => (
@@ -156,7 +156,7 @@ const ListMaker = () =>{
                         }
                     </ul>
 
-                    <ul className="DetachementList" style={{ display: sectionToShow === "DetachementList" ? 'flex' : 'none' }}>
+                    <ul className="DetachementList" style={{ display: sectionToShow === "DetachementList" && format ? 'flex' : 'none' }}>
                         {
                             factions[selectedFaction] && selectedRace ? (
                                 factions[selectedFaction].find(faction => faction.name === selectedRace).detachments.map((detachment, index) => (
@@ -168,10 +168,11 @@ const ListMaker = () =>{
                             : null
                         }
                     </ul>
+                    <div className="ValidateSection">
+                        <button className="CreateButton" style={{ display: sectionToShow === "Validate" ? 'flex' : 'none' }}>Create</button>
+                    </div>
 
-                    <div className={sectionToShow === "Validate" ? 'Logo' : 'LogoN'}></div>
 
-                    <button className="CreateButton" style={{ display: sectionToShow === "Validate" ? 'flex' : 'none' }}>Create</button>
             </div>
         </div>
     )
