@@ -92,3 +92,75 @@
 
 
 
+
+/* Styles pour le bouton Connexion */
+.LoginButton {
+    background-color: #000000;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: 1px solid #444d56;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.LoginButton:hover {
+    background-color: #444d56;
+}
+
+/* Si l'utilisateur est connecté */
+.UserName {
+    font-size: 1rem;
+    margin-left: 0.6rem;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+/**** CONFIG MENU ****/
+
+
+
+
+.config-button-container {
+    position: relative; /* Assure-toi que le conteneur parent est relatif */
+}
+
+.config-menu {
+    position: absolute; /* Positionnement absolu pour le menu */
+    top: 15px; /* Positionne le menu juste en dessous du bouton */
+    right: -10px; /* Aligne à droite du bouton */
+    background-color: #1C2128; /* Couleur de fond du menu */
+    border: 1px solid #30363D; /* Bordure du menu */
+    border-radius: 4px; /* Arrondir les coins */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Ombre pour le menu */
+    z-index: 1000; /* Assure-toi que le menu est au-dessus des autres éléments */
+    width: 6rem; /* Augmenter légèrement la largeur du menu */
+}
+
+.config-item {
+    width: 100%; /* Largeur complète */
+    padding: 10px; /* Espacement interne */
+    border: none; /* Pas de bordure */
+    background-color: #30363D; /* Couleur du bouton */
+    color: white; /* Couleur du texte */
+    cursor: pointer; /* Curseur en forme de main */
+    text-align: left; /* Alignement du texte à gauche */
+    font-size: 1rem; /* Taille de la police par défaut */
+}
+
+.config-item:hover {
+    background-color: #444d56; /* Changement de couleur au survol */
+}
+
+.logout-button {
+    color: #D9534F; /* Un rouge sombre et sobre */
+    font-weight: bold; /* Mettre le texte en gras pour le rendre plus visible */
+}

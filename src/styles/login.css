@@ -1,11 +1,26 @@
+
+.site-title {
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.site-title:hover {
+  color: #58a6ff; /* Couleur au survol */
+}
+
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #0D1117;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #0D1117;
+}
+
   .form-container {
     background-color: #1C2128;
     border: 1px solid #30363D;
@@ -14,12 +29,12 @@
     width: 300px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   }
-  
+
   .title {
     color: white;
     text-align: center;
   }
-  
+
   .input {
     width: 100%;
     padding: 10px;
@@ -50,14 +65,24 @@
     color: white;
     text-align: center;
     margin-top: 15px; /* Spacing above the link */
+    line-height: 1.5rem;
   }
   
-  .create-account a {
-    color: #009688; /* Color for the link */
-    text-decoration: none; /* No underline */
-  }
-  
-  .create-account a:hover {
-    text-decoration: underline; /* Underline on hover */
-  }
-  
+/* Styles pour le bouton "Create an account" */
+.link-button {
+  background: none;
+  border: none;
+  color: #28A745; /* Couleur du texte */
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit; /* Garde la même taille de police que le texte environnant */
+  text-decoration: underline; /* Optionnel, pour souligner le texte comme un lien */
+}
+
+.link-button:hover {
+  color: #36c157; /* Change la couleur au survol */
+}
+
+.link-button:focus {
+  outline: none; /* Supprime le contour au focus */
+}
