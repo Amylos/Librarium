@@ -56,7 +56,7 @@ const Register = (props) => {
 
             const data = await response.json();
             console.log('User created:', data);
-            triggerPopUp("User created successfuly.", '28A745');
+            triggerPopUp("User created successfuly.", '#28A745');
 
             setTimeout(()=>{
                 setComponentToDisplay('Login');
@@ -86,7 +86,7 @@ const Register = (props) => {
                         required
                     />
                     <input
-                        type="email"
+                        type="text"
                         className="input"
                         placeholder="Email"
                         value={mail}

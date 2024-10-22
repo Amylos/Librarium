@@ -7,48 +7,21 @@ import '../styles/Main.css'
 
 
 const Main = (props) => {
-    const triggerPopUp = props.triggerPopUp;
 
+const factions = ['Nécron', 'Space Marines', 'Tyranides', 'Orks', 'Eldar', 'Tau'];
+const armyNames = ['BLIsef du ciel', 'Iron Fist', 'Deathwing', 'Green Tide', 'Shadowstrike', 'Firestorm'];
+const authors = ['Andrew', 'Michael', 'Sarah', 'John', 'Emma', 'Lucas'];
 
-const lists = [
-  {
-    'faction' : 'Nécron',
-    'points' : 2000,
-    'ArmyName' : 'BLIsef du ciel',
-    'Author' : 'Andrew'
-  },
-  {
-    'faction' : 'Nécron',
-    'points' : 2000,
-    'ArmyName' : 'BLIsef du ciel',
-    'Author' : 'Andrew'
-  },
-  {
-    'faction' : 'Nécron',
-    'points' : 2000,
-    'ArmyName' : 'BLIsef du ciel',
-    'Author' : 'Andrew'
-  },
-  {
-    'faction' : 'Nécron',
-    'points' : 2000,
-    'ArmyName' : 'BLIsef du ciel',
-    'Author' : 'Andrew'
-  },
-  {
-    'faction' : 'Nécron',
-    'points' : 2000,
-    'ArmyName' : 'BLIsef du ciel',
-    'Author' : 'Andrew'
-  },
-  {
-    'faction' : 'Nécron',
-    'points' : 2000,
-    'ArmyName' : 'BLIsef du ciel',
-    'Author' : 'Andrew'
-  },
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-]
+const lists = Array.from({ length: 6 }, () => ({
+  'faction': factions[getRandomInt(0, factions.length - 1)],
+  'points': getRandomInt(1000, 3000),
+  'ArmyName': armyNames[getRandomInt(0, armyNames.length - 1)],
+  'Author': authors[getRandomInt(0, authors.length - 1)],
+}));
 
     return (
         <div className="Main">

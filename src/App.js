@@ -59,7 +59,7 @@ function App() {
         ListMaker: <ListMaker setComponentToDisplay = {setComponentToDisplay} triggerPopUp={triggerPopUp}/>,
         Login: <Login setComponentToDisplay = {setComponentToDisplay} userData = {userData} setUserData = {setUserData} triggerPopUp={triggerPopUp}/>,
         Register : <Register setComponentToDisplay = {setComponentToDisplay} triggerPopUp={triggerPopUp}/>,
-        Settings: <Settings setComponentToDisplay = {setComponentToDisplay} userData = {userData} triggerPopUp={triggerPopUp} />
+        Settings: <Settings setComponentToDisplay = {setComponentToDisplay} userData = {userData} setUserData={setUserData} triggerPopUp={triggerPopUp} />
     };
 /***********/
 
