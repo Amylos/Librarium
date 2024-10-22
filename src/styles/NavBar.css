@@ -136,11 +136,11 @@
 .config-menu {
     position: absolute; /* Positionnement absolu pour le menu */
     top: 15px; /* Positionne le menu juste en dessous du bouton */
-    right: -10px; /* Aligne à droite du bouton */
+    right: -30px; /* Aligne à droite du bouton */
     background-color: #1C2128; /* Couleur de fond du menu */
     border: 1px solid #30363D; /* Bordure du menu */
     border-radius: 4px; /* Arrondir les coins */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Ombre pour le menu */
+    box-shadow: 0 14px 10px 1px rgba(0, 0, 0, 0.9); /* Ombre pour le menu */
     z-index: 1000; /* Assure-toi que le menu est au-dessus des autres éléments */
     width: 6rem; /* Augmenter légèrement la largeur du menu */
 }
