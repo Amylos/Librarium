@@ -4,3 +4,59 @@
     background-color: #000000;
     overflow: hidden; /* Pour éviter le scroll */
 }
+
+
+
+/* Pop-up */
+.pop-up {
+  font-weight: bold;
+  position: fixed;
+  width: 90%;
+  max-width: 400px;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: linear-gradient(135deg, #1C2128, #30363D); /* Couleur de fond moins sombre */
+  color: #fff;
+  padding: 15px 25px;
+  border-radius: 8px; /* Bords arrondis */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Ombre légère */
+  font-size: 14px; /* Taille de la police */
+  text-align: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pop-up.show {
+  animation: popIn 0.5s forwards;
+}
+
+@keyframes popIn {
+  0% {
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+  }
+  100% {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+  }
+}
+
+.pop-up.hide {
+  animation: popOut 0.5s forwards; /* Animation de sortie */
+}
+
+@keyframes popOut {
+  0% {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+  }
+  100% {
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+  }
+}

@@ -8,7 +8,7 @@ import '../styles/register.css';
 const Register = (props) => {
 
     const setComponentToDisplay = props.setComponentToDisplay;
-
+    const triggerPopUp = props.triggerPopUp;
 
 
     // Déclaration des états pour chaque champ
@@ -55,20 +55,17 @@ const Register = (props) => {
             }
 
             const data = await response.json();
-            console.log('Utilisateur créé:', data);
-            setTimeout(()=>{
-                console.log("oui");
-                setComponentToDisplay('Login');
+            console.log('User created:', data);
+            triggerPopUp("User created successfuly.", '#28A745');
 
-            },3000);
+            setTimeout(()=>{
+                setComponentToDisplay('Login');
+            },2000);
 
         } catch (error) {
             console.error('Erreur:', error);
+            triggerPopUp('Error', '#D9534F');
         }
-
-
-
-
     };
 
 
@@ -89,7 +86,7 @@ const Register = (props) => {
                         required
                     />
                     <input
-                        type="email"
+                        type="text"
                         className="input"
                         placeholder="Email"
                         value={mail}

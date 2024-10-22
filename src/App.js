@@ -8,50 +8,83 @@ import ListMaker from "./components/ListMaker";
 import UserLists from "./components/UserLists";
 import Login from "./components/Login";
 import Register from './components/Register';
-
+import Settings from "./components/Settings";
 
 
 
 function App() {
 
-/******/
+/**POP UP***/
+    const [popUp, setPopUp] = useState({
+        isVisible: false,
+        message: 'Un message dans la pop up !',
+        color: '#FFFFFF',
+    });
+
+    useEffect(() => {
+        if (popUp.isVisible) {
+        const timer = setTimeout(() => {
+            setPopUp((prev) => ({ ...prev, isVisible: false }));
+        }, 4000);
+
+        return () => clearTimeout(timer);
+        }
+    }, [popUp.isVisible]);
+
+    const triggerPopUp = (message, color) => {
+        setPopUp({ message, color, isVisible: true });
+    };
+
+/***********/
+
+/****USER****/
     const [userData, setUserData] = useState({
         pseudo: null,
         mail: "",
         password: "",
         authToken: null,
         id: null,
-        isConnected: true,
+        isConnected: false,
     });
 
-    // console.log('App',userData);
-/******/
+/***********/
+
+/***COMP****/
 
     const [componentToDisplay, setComponentToDisplay] = useState("main");
 
     const components = {
-        main: <Main setComponentToDisplay = {setComponentToDisplay}/>,
-        UserLists: <UserLists setComponentToDisplay = {setComponentToDisplay}/>,
-        ListMaker: <ListMaker setComponentToDisplay = {setComponentToDisplay}/>,
-        Login: <Login setComponentToDisplay = {setComponentToDisplay} userData = {userData} setUserData = {setUserData}/>,
-        Register : <Register setComponentToDisplay = {setComponentToDisplay}/>
+        main: <Main setComponentToDisplay = {setComponentToDisplay} triggerPopUp={triggerPopUp}/>,
+        UserLists: <UserLists setComponentToDisplay = {setComponentToDisplay} triggerPopUp={triggerPopUp}/>,
+        ListMaker: <ListMaker setComponentToDisplay = {setComponentToDisplay} triggerPopUp={triggerPopUp}/>,
+        Login: <Login setComponentToDisplay = {setComponentToDisplay} userData = {userData} setUserData = {setUserData} triggerPopUp={triggerPopUp}/>,
+        Register : <Register setComponentToDisplay = {setComponentToDisplay} triggerPopUp={triggerPopUp}/>,
+        Settings: <Settings userData = {userData} triggerPopUp={triggerPopUp}/>
     };
+/***********/
 
-  return (
-    <div className="App">
-        {
-            componentToDisplay === "Login" || componentToDisplay  === "Register" ?
-            <>
-                {components[componentToDisplay] || null}
-            </>
-            :
-            <>
-                <NavBar setComponentToDisplay = {setComponentToDisplay} userData = {userData} setUserData = {setUserData}/>
-                {components[componentToDisplay] || null}
-            </>
-        }
-    </div>
-  );
+
+
+    return (
+        <div className="App">
+            {
+                componentToDisplay === "Login" || componentToDisplay  === "Register" ?
+                <>
+                    {components[componentToDisplay] || null}
+                </>
+                :
+                <>
+                    <NavBar setComponentToDisplay = {setComponentToDisplay} userData = {userData} setUserData = {setUserData} triggerPopUp={triggerPopUp}/>
+                    {components[componentToDisplay] || null}
+                </>
+            }
+            {
+                <div className={`pop-up ${!popUp.isVisible ? 'hide' : 'show'}`} style={{color:popUp.color}}>
+                    {popUp.message}
+                </div>
+            }
+        </div>
+    );
 }
 
 export default App;

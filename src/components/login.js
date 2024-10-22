@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import '../styles/login.css'
 
 const Login = (props) => {
@@ -9,8 +11,14 @@ const Login = (props) => {
     const setUserData = props.setUserData;
 
     const setComponentToDisplay = props.setComponentToDisplay;
-    const setIsConnected = props.setIsConnected;
+    const triggerPopUp = props.triggerPopUp;
 
+
+    const [showPassword, setShowPassword] = useState(false); // État pour gérer la visibilité du mot de passe
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const handleEmailChange = (e) => {
         const { value } = e.target;
@@ -66,41 +74,47 @@ const Login = (props) => {
 
                 // console.log(userData)
                 setComponentToDisplay('main');
+                triggerPopUp("Connected", '#28A745');
+
             } else {
                 console.error('No token found in response.');
+                triggerPopUp('Login or Password Incorrect','#D9534F');
             }
-
-            // SET UP EVERYTHING HERE
-
         } catch (error) {
             console.error('Error during login:', error);
+            triggerPopUp('Login or Password Incorrect','#D9534F');
         }
     };
 
     return (
-        <div className="container">
+        <div className="Login">
             <div className="form-container">
                 <button className="back-button" onClick={() => setComponentToDisplay('main')}>
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
                 <h2 className="title">Connexion</h2>
                 <form onSubmit={handleConnexion}>
-                    <input 
-                        type="email" 
-                        className="input" 
-                        placeholder="Mail" 
+                    <input
+                        type="text"
+                        className="input"
+                        placeholder="Mail"
                         value={userData.mail}
-                        onChange={handleEmailChange} 
-                        required 
+                        onChange={handleEmailChange}
+                        required
                     />
-                    <input 
-                        type="password" 
-                        className="input" 
-                        placeholder="Password" 
-                        value={userData.password}
-                        onChange={handlePasswordChange} 
-                        required 
-                    />
+                     <div className="password-container">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            className="input"
+                            placeholder="Password"
+                            value={userData.password}
+                            onChange={handlePasswordChange}
+                            required
+                        />
+                        <button type="button" className="toggle-password" onClick={togglePasswordVisibility}>
+                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                        </button>
+                    </div>
                     <button type="submit" className="button">Connect</button>
                 </form>
                 <p className="create-account">

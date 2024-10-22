@@ -7,6 +7,7 @@ import '../styles/Main.css'
 
 
 const Main = (props) => {
+    const triggerPopUp = props.triggerPopUp;
 
 
 const lists = [

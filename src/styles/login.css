@@ -1,24 +1,12 @@
 
-.site-title {
-  color: white;
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.site-title:hover {
-  color: #58a6ff; /* Couleur au survol */
-}
-
-.container {
+.Login {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background-color: #0D1117;
+  
 }
 
   .form-container {
