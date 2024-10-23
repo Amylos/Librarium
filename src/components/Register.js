@@ -60,7 +60,7 @@ const Register = (props) => {
 
             setTimeout(()=>{
                 setComponentToDisplay('Login');
-            },2000);
+            },1000);
 
         } catch (error) {
             console.error('Erreur:', error);

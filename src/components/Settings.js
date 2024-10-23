@@ -8,14 +8,15 @@ const Settings = (props) => {
     const userData = props.userData;
     const setUserData = props.setUserData;
     const triggerPopUp = props.triggerPopUp;
+    const setComponentToDisplay = props.setComponentToDisplay;
 
-    const [pseudo, setPseudo] = useState('');
-    const [mail, setMail] = useState('');
-    const [password, setPassword] = useState('');
+    const [pseudo, setPseudo] = useState(userData.pseudo);
+    const [mail, setMail] = useState(userData.mail);
+    const [password, setPassword] = useState(userData.password);
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent page reload
+        e.preventDefault();
 
         const credentials = {
             mail: mail,
@@ -38,15 +39,20 @@ const Settings = (props) => {
             }
 
             const data = await response.json();
-            const lastToken = data.user.authTokens[data.user.authTokens.length - 1]?.authToken;
+            console.log(data);
+            const lastToken = data.authTokens[data.authTokens.length - 1]?.authToken;
 
             setUserData((prevData) => ({
                 ...prevData,
                 token: lastToken, // Last token
-                id: data.user._id, // User ID
+                id: data._id, // User ID
                 isConnected: true,
-                pseudo: data.user.pseudo,
+                pseudo: data.pseudo,
             }));
+
+            setTimeout(()=>{
+                setComponentToDisplay('main');
+            },1000);
 
             triggerPopUp("User updated successfully", '#28A745');
         } catch (err) {
