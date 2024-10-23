@@ -11,7 +11,7 @@ const Settings = (props) => {
     const setComponentToDisplay = props.setComponentToDisplay;
 
     const [pseudo, setPseudo] = useState(userData.pseudo);
-    const [mail, setMail] = useState(userData.mail);
+    // const [mail, setMail] = useState(userData.mail);
     const [password, setPassword] = useState(userData.password);
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -19,7 +19,7 @@ const Settings = (props) => {
         e.preventDefault();
 
         const credentials = {
-            mail: mail,
+            // mail: mail,
             password: password,
             pseudo: pseudo,
         };
@@ -77,14 +77,14 @@ const Settings = (props) => {
                         onChange={(e) => setPseudo(e.target.value)}
                         required
                     />
-                    <input
+                    {/* <input
                         type="email"
                         className="input"
                         placeholder="Email"
                         value={mail}
                         onChange={(e) => setMail(e.target.value)}
                         required
-                    />
+                    /> */}
                     <input
                         type="password"
                         className="input"
