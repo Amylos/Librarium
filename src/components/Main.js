@@ -1,7 +1,5 @@
 import { useState,useEffect } from "react";
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import ArmyList from "./ArmyList";
 
 import '../styles/Main.css'
 
@@ -49,30 +47,3 @@ export default Main;
 
 
 
-const ArmyList = () =>{
-    return(
-        <div className="ArmyList">
-            <div className="Left">
-                <div className="Faction">
-                    Faction
-                </div>
-                <div className="Points">
-                    2000 points
-                </div>
-            </div>
-            <div className="Center">
-                <div className="ArmyName">
-                    Army Name
-                </div>
-                <div className="Author">
-                    Author
-                </div>
-            </div>
-            <div className="Right">
-                <button className="Favoris">
-                <FontAwesomeIcon className="Icon" icon={faStar} />
-                </button>
-            </div>
-        </div>
-    )
-}

@@ -10,8 +10,6 @@ import Login from "./components/Login";
 import Register from './components/Register';
 import Settings from "./components/Settings";
 
-
-
 function App() {
 
 /**POP UP***/

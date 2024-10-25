@@ -1,0 +1,56 @@
+.OneList {
+    padding: 20px;
+    background-color: #1C2128;
+    color: #E1E4E8;
+}
+
+.Header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.BackButton {
+    background-color: #30363D;
+    border: none;
+    color: #E1E4E8;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.ArmyName {
+    flex: 1;
+    text-align: center;
+    color: #E1E4E8;
+}
+
+.RulesButton {
+    background-color: #30363D;
+    border: none;
+    color: #E1E4E8;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.UnitsSection {
+    margin-top: 20px;
+}
+
+.UnitTypeGroup {
+    margin-top: 15px;
+}
+
+.UnitTypeTitle {
+    background-color: #0D1117;
+    padding: 8px;
+    color: #E1E4E8;
+    font-weight: bold;
+}
+
+.UnitCard {
+    background-color: #30363D;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    color: #E1E4E8;
+}
