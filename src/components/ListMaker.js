@@ -3,48 +3,111 @@ import { useState,useEffect } from "react";
 import '../styles/ListMaker.css'
 
 
-const factions = {
-
-    imperium: [
-      { name: 'Adeptus Mechanicus', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'Astra Militarum', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'Sisters of Battle', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'Inquisition', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'Imperial Knights', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-    ],
-    space_marines: [
-      { name: 'Ultramarines', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'Blood Angels', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'Dark Angels', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'Space Wolves', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'Black Templars', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'Grey Knights', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-    ],
-    chaos: [
-      { name: 'Chaos Space Marines', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'Death Guard', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'Thousand Sons', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'World Eaters', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      { name: 'Chaos Daemons', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3'] },
-    ],
-    xenos: [
-        { name: 'Aeldari', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
-        { name: 'Drukhari', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
-        { name: 'Orks', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
-        { name: 'Necrons', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
-        { name: 'T\'au', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
-        { name: 'Tyranids', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
-        { name: 'Genestealer Cults', detachments: ['undétachement 1', 'undétachement 2', 'undétachement 3','undétachement 1', 'undétachement 2', 'undétachement 3'] },
-      ]
-  };
 
 
-const ListMaker = () =>{
+const ListMaker = (props) =>{
 
+    const userData = props.userData;
+    const setComponentToDisplay = props.setComponentToDisplay;
+    const triggerPopUp = props.triggerPopUp;
+
+    const factions = [
+        { name: "Space Marine" },
+        { name: "Imperium" },
+        { name: "Xenos" },
+        { name: "Chaos" }
+    ];
+    
+
+    const [armies,setArmies] = useState(null);
+    const [detachments,setDetachments] = useState(null);
+
+    
+    useEffect(()=>{
+
+        GetArmies();
+        GetDetachments();
+
+    },[]);
+
+    async function GetArmies() {
+        try {
+            const response = await fetch('http://localhost:3001/armies', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+            }
+            const armies = await response.json();
+            console.log('Armées récupérées:', armies);
+            setArmies(armies);
+            return armies;
+        } catch (error) {
+            console.error('Erreur lors de la récupération des armées:', error);
+            return null;
+        }
+    }
+
+    async function GetDetachments() {
+        try {
+            const response = await fetch('http://localhost:3001/detachments', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+            }
+
+            const detachments = await response.json();
+            console.log('Détachements récupérées:', detachments);
+            setDetachments(detachments);
+            return detachments;
+
+        } catch (error) {
+            console.error('Erreur lors de la récupération des armées:', error);
+            return null;
+        }
+    }
+
+    async function CreateList() {
+        try {
+            const response = await fetch('http://localhost:3001/lists', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    author: userData.pseudo,
+                    userId:userData.id,
+                    name:name,
+                    faction:selectedFaction,
+                    army:selectedRace,
+                    points:format,
+                    unitsNumber:0,
+                    figurinesNumber:0,
+                    detachments:selectedDetachement
+                })
+            });
+            if (!response.ok) {
+                throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+            }
+            const newArmy = await response.json();
+            console.log('Armée créée avec succès:', newArmy);
+            triggerPopUp("List created successfuly.", '#28A745');
+            return newArmy;
+        } catch (error) {
+            console.error('Erreur lors de la création de l\'armée:', error);
+            triggerPopUp(`Failed to create new list`, '#D9534F');
+            return null;
+        }
+    }
 
     const [sectionToShow,setSectionToShow] = useState("FactionList");
-
-
 
     const [name, setName] = useState('');
     const [format, setFormat] =useState(null);
@@ -77,6 +140,13 @@ const ListMaker = () =>{
     const handleDetachmentChange = (detachment) => {
         setSelectedDetachement(detachment);
         setSectionToShow('Validate'); // Aller à la validation
+        console.log("Résumé de la sélction :");
+        console.log("Name",name);
+        console.log("Format",format);
+        console.log("Faction : ",selectedFaction);
+        console.log("Army : ", selectedRace );
+        console.log("Detachment : ",detachment);
+
     };
 
     const ChangeFaction = () =>{
@@ -91,7 +161,6 @@ const ListMaker = () =>{
         setSelectedRace('');
         setSelectedDetachement('');
     }
-
 
     return (
         <div className="ListMaker">
@@ -118,7 +187,7 @@ const ListMaker = () =>{
 
                     {selectedFaction && format && <div  onClick={()=>ChangeFaction()} className="ArmyIdentity">{selectedFaction.charAt(0).toUpperCase() + selectedFaction.replace('_', ' ').slice(1)}</div>}
                     {selectedRace && format && <div onClick={()=>ChangeArmy()}  className="ArmyIdentity">{selectedRace.charAt(0).toUpperCase() + selectedRace.replace('_', ' ').slice(1)}</div>}
-                    {selectedDetachement  && <div  className="ArmyIdentity">{selectedDetachement.charAt(0).toUpperCase() + selectedDetachement.replace('_', ' ').slice(1)}</div>}
+                    {selectedDetachement  && <div  className="ArmyIdentity">{selectedDetachement.name.charAt(0).toUpperCase() + selectedDetachement.name.replace('_', ' ').slice(1)}</div>}
 
                     {
                         !selectedFaction && format ?
@@ -134,45 +203,34 @@ const ListMaker = () =>{
 
                     <ul className="FactionList" style={{ display: sectionToShow === "FactionList" && format ? 'flex' : 'none' }}>
                         {
-                            Object.keys(factions).map((factionKey) => (
-                            <li key={factionKey} onClick={() => {handleFactionChange(factionKey)}}>
-                                {factionKey.replace('_', ' ').charAt(0).toUpperCase() + factionKey.replace('_', ' ').slice(1)}
+                            factions.map((faction) => (
+                            <li key={faction.name} onClick={() => {handleFactionChange(faction.name)}}>
+                                {faction.name}
                             </li>
                             ))
                         }
                     </ul>
-
                     <ul className="RaceList" style={{ display: sectionToShow === "RaceList" && format ? 'flex' : 'none'}}>
-                        {
-                            factions[selectedFaction] ? (
-                                factions[selectedFaction].map((faction) => (
-                                <li key={faction.name} value={faction.name} role='button' onClick={() => {handleRaceChange(faction.name)}}>
-                                    {faction.name}
+                        {selectedFaction && armies && armies.map((army,index) => (
+                            selectedFaction === army.faction ? (
+                                <li key={index} value={army.name} role='button' onClick={() => {handleRaceChange(army.name)}}>
+                                    {army.name}
                                 </li>
-                                ))
-                            )
-                            :
-                            null
-                        }
+                            ) : null
+                        ))}
                     </ul>
-
                     <ul className="DetachementList" style={{ display: sectionToShow === "DetachementList" && format ? 'flex' : 'none' }}>
-                        {
-                            factions[selectedFaction] && selectedRace ? (
-                                factions[selectedFaction].find(faction => faction.name === selectedRace).detachments.map((detachment, index) => (
-                                    <li key={index} role="button" onClick={() => handleDetachmentChange(detachment)}>
-                                        {detachment}
-                                    </li>
-                                ))
-                            )
-                            : null
-                        }
+                        {selectedFaction && selectedRace && detachments && detachments.map((detachment, index) => (
+                            selectedRace === detachment.army ? (
+                                <li key={index} role="button" onClick={() => handleDetachmentChange(detachment)}>
+                                    {detachment.name}
+                                </li>
+                            ) : null
+                        ))}
                     </ul>
                     <div className="ValidateSection">
-                        <button className="CreateButton" style={{ display: sectionToShow === "Validate" ? 'flex' : 'none' }}>Create</button>
+                        <button className="CreateButton" style={{ display: sectionToShow === "Validate" ? 'flex' : 'none' }} onClick={() => CreateList()}>Create</button>
                     </div>
-
-
             </div>
         </div>
     )
