@@ -99,6 +99,7 @@ const ListMaker = (props) =>{
             const newArmy = await response.json();
             console.log('Armée créée avec succès:', newArmy);
             triggerPopUp("List created successfuly.", '#28A745');
+            setComponentToDisplay('UserLists');
             return newArmy;
         } catch (error) {
             console.error('Erreur lors de la création de l\'armée:', error);

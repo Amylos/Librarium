@@ -11,6 +11,7 @@ const OneList = (props) => {
     console.log("Onelist", props);
 
     const [selectedUnit,setSelectedUnit] = useState(null);
+    const [showRules, setShowRules] = useState(null);
 
     function HandleSelectUnit(unit){
         if(unit)
@@ -21,9 +22,19 @@ const OneList = (props) => {
         setSelectedUnit(null);
     }
 
+    function HandleShowRules(rules){
+        setShowRules(rules);
+    }
+
     return (
         <div className="OneList">
+
             {
+                showRules ?
+                <Rules HandleShowRules={HandleShowRules} showRules = {showRules}/>
+                :
+                <>
+                                {
                 !selectedUnit ?
                 <>
                 <div className="ListInfos">
@@ -33,8 +44,8 @@ const OneList = (props) => {
                     <h3 className="ListName">ListName</h3>
                 </div>
                 <div className="ListActions">
-                    <button className="ListRules">Rules</button>
-                    <p className="ListPoints">Points</p>
+                    <button className="ListRules" onClick={()=>{HandleShowRules("rules")}}>Rules</button>
+                    <p className="ListPoints">1000</p>
                     <button className="AddUnit">Add</button>
                 </div>
                 <div className="ListUnits">
@@ -94,9 +105,35 @@ const OneList = (props) => {
                 </>
                 :
                 <UnitDisplay HandleUnSelectUnit={HandleUnSelectUnit} unit = {selectedUnit}/>
+                }
+                </>
             }
         </div>
     );
 };
 
 export default OneList;
+
+
+
+const Rules = (props) => {
+
+    const HandleShowRules = props.HandleShowRules;
+    const showRules = props.showRules;
+
+    return (
+        <div className="Rules">
+            <button className="BackButton" onClick={()=>HandleShowRules(null)}>
+                <FontAwesomeIcon icon={faArrowLeft} />
+            </button>
+            <div className="ArmyRules">
+                <h2 className="ArmyRulesTitle">ArmyRules</h2>
+                <p> bla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabal</p>
+            </div>
+            <div className="DetachmentRules">
+                <h2 className="DetachmentsRulesTitle">Det Rules</h2>
+                <p> bla blabal bla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabal</p>
+            </div>
+        </div>
+    )
+}
