@@ -1,52 +1,100 @@
 import React from "react";
-import "../styles/oneList.css"; // Import du fichier CSS pour le style
+import "../styles/OneList.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { useState } from "react";
+import UnitDisplay from "../components/UnitDisplay"
 
-const OneList = ({ HandleBack }) => {
-    // Valeurs d'exemple pour la liste et les unités
-    const exampleList = {
-        ArmyName: "Deathwing Detachment", // Nom fictif de la liste
-        units: {
-            Personnage: [
-                { unite: "Captain", points: [100], type: "Character" },
-                { unite: "Chaplain", points: [85], type: "Character" },
-            ],
-            Infanterie: [
-                { unite: "Intercessor Squad", points: [90], type: "Infantry" },
-                { unite: "Tactical Squad", points: [75], type: "Infantry" },
-            ],
-            Véhicule: [
-                { unite: "Predator Tank", points: [150], type: "Vehicle" },
-                { unite: "Land Raider", points: [250], type: "Vehicle" },
-            ],
-        },
-    };
+const OneList = (props) => {
+    const HandleBack = props.HandleBack;
+    const selectedList = props.selectedList;
+    console.log("Onelist", props);
+
+    const [selectedUnit,setSelectedUnit] = useState(null);
+
+    function HandleSelectUnit(unit){
+        if(unit)
+        setSelectedUnit(unit);
+    }
+
+    function HandleUnSelectUnit(){
+        setSelectedUnit(null);
+    }
 
     return (
         <div className="OneList">
-            {/* En-tête avec le bouton de retour, nom de la liste, et bouton pour les règles */}
-            <div className="Header">
-                <button className="BackButton" onClick={HandleBack}>Retour</button>
-                <h2 className="ArmyName">{exampleList.ArmyName}</h2>
-                <button className="RulesButton">Afficher les règles</button>
-            </div>
-
-            {/* Section des unités par type */}
-            <div className="UnitsSection">
-                {Object.entries(exampleList.units).map(([type, unitsByType]) => (
-                    <div key={type} className="UnitTypeGroup">
-                        <h3 className="UnitTypeTitle">{type}</h3>
-                        <div className="UnitList">
-                            {unitsByType.map((unit, index) => (
-                                <div key={index} className="UnitCard">
-                                    <h4>{unit.unite}</h4>
-                                    <p>Points: {unit.points.join(", ")}</p>
-                                    <p>Type: {unit.type}</p>
-                                </div>
-                            ))}
+            {
+                !selectedUnit ?
+                <>
+                <div className="ListInfos">
+                    <button className="BackButton" onClick={HandleBack}>
+                        <FontAwesomeIcon icon={faArrowLeft} />
+                    </button>
+                    <h3 className="ListName">ListName</h3>
+                </div>
+                <div className="ListActions">
+                    <button className="ListRules">Rules</button>
+                    <p className="ListPoints">Points</p>
+                    <button className="AddUnit">Add</button>
+                </div>
+                <div className="ListUnits">
+                    <section className="PersonnageSection">
+                        <h3 className="TitleSection">Personnage</h3>
+                        <div className="Unit" onClick={() => HandleSelectUnit(1)}>
+                            <div className="LeftUnit">
+                                <p className="Itération">1</p>
+                                <p className="UnitName">Nom</p>
+                            </div>
+                            <p className="UnitPoints">Points</p>
                         </div>
+                    </section>
+                    <section className="LigneSection">
+                    <h3 className="TitleSection">Ligne</h3>
+                    <div className="Unit">
+                        <div className="LeftUnit">
+                            <p className="Itération">1</p>
+                            <p className="UnitName">Nom</p>
+                        </div>
+                        <p className="UnitPoints">Points</p>
                     </div>
-                ))}
-            </div>
+                    </section>
+                    <section className="InfantrySection">
+                        <h3 className="TitleSection">Infantrie</h3>
+                        <div className="Unit">
+                            <div className="LeftUnit">
+                                <p className="Itération">1</p>
+                                <p className="UnitName">Nom</p>
+                            </div>
+                            <p className="UnitPoints">Points</p>
+                        </div>
+
+                    </section>
+                    <section className="VehiculesSection">
+                    <h3 className="TitleSection">Véhicule</h3>
+                    <div className="Unit">
+                        <div className="LeftUnit">
+                            <p className="Itération">1</p>
+                            <p className="UnitName">Nom</p>
+                        </div>
+                        <p className="UnitPoints">Points</p>
+                    </div>
+
+                    </section>
+                    <section className="MonstresSection">
+                    <h3 className="TitleSection">Monstre</h3>
+                    <div className="Unit">
+                        <div className="LeftUnit">
+                            <p className="Itération">1</p>
+                            <p className="UnitName">Nom</p>
+                        </div>
+                        <p className="UnitPoints">Points</p>
+                    </div>
+                    </section>
+                </div>
+                </>
+                :
+                <UnitDisplay HandleUnSelectUnit={HandleUnSelectUnit} unit = {selectedUnit}/>
+            }
         </div>
     );
 };

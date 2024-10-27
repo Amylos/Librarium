@@ -59,6 +59,7 @@ function App() {
         Register : <Register setComponentToDisplay = {setComponentToDisplay} triggerPopUp={triggerPopUp}/>,
         Settings: <Settings setComponentToDisplay = {setComponentToDisplay} userData = {userData} setUserData={setUserData} triggerPopUp={triggerPopUp} />
     };
+
 /***********/
 
 

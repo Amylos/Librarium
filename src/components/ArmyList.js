@@ -9,8 +9,11 @@ const ArmyList = (props) =>{
     const name = props.name;
     const author = props.author;
 
+    const list = props.list;
+    const HandleClick = props.HandleClick;
+
     return(
-        <div className="ArmyList">
+        <div className="ArmyList" onClick={() => HandleClick(list)}>
             <div className="Left">
                 <div className="Faction">
                     Faction

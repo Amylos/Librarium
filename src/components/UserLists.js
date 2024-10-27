@@ -7,10 +7,27 @@ import '../styles/UserLists.css';
 const UserLists = (props) => {
 
     const [selectedList, setSelectedList] = useState(null);
+    
+    const lists = [
+        {
+            "author":"Andrew",
+            "points":1000,
+            "faction":"Tyranides"
+        },
+        {
+            "author":"Andrew",
+            "points":1000,
+            "faction":"Tyranides"
+        },
+        {
+            "author":"Andrew",
+            "points":1000,
+            "faction":"Tyranides"
+        }
+    ]
 
     const HandleClick = (list) => {
-        setSelectedList(1);
-        console.log(selectedList);
+        setSelectedList(list);
     };
 
     const HandleBack = () => {
@@ -28,15 +45,17 @@ const UserLists = (props) => {
                             </div>
                         </div>
                         <div className="Section">
-                            <button className="BtnArmy"  onClick={() => HandleClick("data")}>
-                                <ArmyList/>
-                            </button>
+                            {
+                                lists.map((list)=>(
+                                    <ArmyList HandleClick={HandleClick} list = {list}/>
+                                ))
+                            }
                         </div>
                         <div className="Footer"></div>
                     </>
                     :
                     <>
-                        <OneList HandleBack = {HandleBack}/>
+                        <OneList HandleBack = {HandleBack} list={selectedList}/>
                     </>
                 }
             </div>
