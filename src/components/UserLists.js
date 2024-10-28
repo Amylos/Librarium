@@ -15,6 +15,7 @@ const UserLists = (props) => {
           const response = await fetch(`http://localhost:3001/lists/${userData.id}`); // Remplacez l'URL par celle de votre API
           const json = await response.json();
           setUserLists(json);
+          console.log("Fecth lists : ",json);
         } catch (error) {
           console.error(error);
         }

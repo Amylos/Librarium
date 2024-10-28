@@ -75,7 +75,7 @@ const OneList = (props) => {
                                 {
                                     units.map((unit) => (
                                         unit.type === "Caracter" &&
-                                        <div className="Unit" onClick={() => HandleSelectUnit(1)}>
+                                        <div className="Unit" onClick={() => HandleSelectUnit(unit)}>
                                             {
                                                 unit.figurines[0].selected === true ?
                                                 <>
@@ -108,7 +108,7 @@ const OneList = (props) => {
                                 {
                                     units.map((unit) => (
                                         unit.type === "Line" &&
-                                        <div className="Unit" onClick={() => HandleSelectUnit(1)}>
+                                        <div className="Unit" onClick={() => HandleSelectUnit(unit)}>
                                             {
                                                 unit.figurines[0].selected === true ?
                                                 <>
@@ -116,7 +116,7 @@ const OneList = (props) => {
                                                         <p className="Itération">{unit.figurines[0].count}</p>
                                                         <p className="UnitName">{unit.unite}</p>
                                                     </div>
-                                                    <p className="UnitPoints">{unit.points[0]}</p>
+                                                    <p className="UnitPoints">{unit.points[0]} points</p>
                                                 </>
                                                 :
                                                 <>
@@ -141,7 +141,7 @@ const OneList = (props) => {
                                 {
                                     units.map((unit) => (
                                         unit.type === "Infantry" &&
-                                        <div className="Unit" onClick={() => HandleSelectUnit(1)}>
+                                        <div className="Unit" onClick={() => HandleSelectUnit(unit)}>
                                             {
                                                 unit.figurines[0].selected === true ?
                                                 <>
@@ -174,7 +174,7 @@ const OneList = (props) => {
                                 {
                                     units.map((unit) => (
                                         unit.type === "Vehicule" &&
-                                        <div className="Unit" onClick={() => HandleSelectUnit(1)}>
+                                        <div className="Unit" onClick={() => HandleSelectUnit(unit)}>
                                             {
                                                 unit.figurines[0].selected === true ?
                                                 <>
@@ -182,7 +182,7 @@ const OneList = (props) => {
                                                         <p className="Itération">{unit.figurines[0].count}</p>
                                                         <p className="UnitName">{unit.unite}</p>
                                                     </div>
-                                                    <p className="UnitPoints">{unit.points[0]}</p>
+                                                    <p className="UnitPoints">{unit.points[0]} points</p>
                                                 </>
                                                 :
                                                 <>
@@ -207,7 +207,7 @@ const OneList = (props) => {
                                 {
                                     units.map((unit) => (
                                         unit.type === "Monster" &&
-                                        <div className="Unit" onClick={() => HandleSelectUnit(1)}>
+                                        <div className="Unit" onClick={() => HandleSelectUnit(unit)}>
                                             {
                                                 unit.figurines[0].selected === true ?
                                                 <>
@@ -215,7 +215,7 @@ const OneList = (props) => {
                                                         <p className="Itération">{unit.figurines[0].count}</p>
                                                         <p className="UnitName">{unit.unite}</p>
                                                     </div>
-                                                    <p className="UnitPoints">{unit.points[0]}</p>
+                                                    <p className="UnitPoints">{unit.points[0]} points</p>
                                                 </>
                                                 :
                                                 <>

@@ -10,13 +10,14 @@ const UnitDisplay = (props) => {
     const HandleUnSelectUnit = props.HandleUnSelectUnit;
     const unit = props.unit;
 
+    console.log(unit);
     return (
         <div className="UnitDisplay">
             <div className='Unitsheader'>
                 <button className='BackButton' onClick={() => {HandleUnSelectUnit()}}>
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
-                <h3 className='UnitNames'>Terminator</h3>
+                <h3 className='UnitNames'>{unit.unite}</h3>
                 <button className='UnitConfig'>
                     <FontAwesomeIcon icon={faGears} />
                 </button>
@@ -27,7 +28,7 @@ const UnitDisplay = (props) => {
                             M
                         </div>
                         <div className='StatsCheck'>
-                            6"
+                            {unit.stats.mouvement}
                         </div>
                     </div>
                     <div className='StatsColumn'>
@@ -35,7 +36,7 @@ const UnitDisplay = (props) => {
                             T
                         </div>
                         <div className='StatsCheck'>
-                            12
+                        {unit.stats.mouvement}
                         </div>
                     </div>
                     <div className='StatsColumn'>
@@ -43,7 +44,16 @@ const UnitDisplay = (props) => {
                             SV
                         </div>
                         <div className='StatsCheck'>
-                            3+/4+
+                        {
+                            unit.stats.sauvegarde.length > 2 ?
+                            <>
+                                {unit.stats.sauvegarde[0]} / {unit.stats.sauvegarde[1]}
+                            </>
+                            :
+                            <>
+                                {unit.stats.sauvegarde[0]}
+                            </>
+                        }
                         </div>
                     </div>
                     <div className='StatsColumn'>
@@ -51,7 +61,7 @@ const UnitDisplay = (props) => {
                             W
                         </div>
                         <div className='StatsCheck'>
-                            3
+                            {unit.stats.points_de_vie}
                         </div>
                     </div>
                     <div className='StatsColumn'>
@@ -59,7 +69,7 @@ const UnitDisplay = (props) => {
                             LD
                         </div>
                         <div className='StatsCheck'>
-                            6
+                            {unit.stats.commandement}
                         </div>
                     </div>
                     <div className='StatsColumn'>
@@ -67,14 +77,20 @@ const UnitDisplay = (props) => {
                             OC
                         </div>
                         <div className='StatsCheck'>
-                            2
+                            {unit.stats.controle_objectif}
                         </div>
                     </div>
                 </div>
                 <h3 className='UnitNames'>Weapons</h3>
-                <Weapons/>
+                        {
+                            unit.armes.map((weapon) =>(
+                                <Weapons weapon = {weapon}/>
+
+                            ))
+                        }
+
                 <h3 className='UnitNames'>Abilities</h3>
-                <Abilities/>
+                <Abilities aptitudes = {unit.aptitudes} aptitudesBase = {unit.aptitudesBase}/>
                 <KeyWords/>
         </div>
     );
@@ -85,18 +101,22 @@ export default UnitDisplay;
 
 
 
-const Weapons = () =>{
+const Weapons = (props) =>{
+
+    const weapon = props.weapon;
+    console.log('weapon',weapon);
+
     return(
         <div className='Weapons'>
             <div className='OneWeapon'>
-                <h4 className='WeaponName'>Cannon d'assaut</h4>
+                <h4 className='WeaponName'>{weapon.name}</h4>
                 <div className='WeaponStatsContainer'>
                     <div className='WeaponStatsColumn'>
                         <div className='WeaponStatsName'>
                             Range
                         </div>
                         <div className='WeaponStatsCheck'>
-                            16"
+                        {weapon.portee}
                         </div>
                     </div>
                     <div className='WeaponStatsColumn'>
@@ -104,7 +124,7 @@ const Weapons = () =>{
                             A
                         </div>
                         <div className='WeaponStatsCheck'>
-                            1
+                        {weapon.attaque}
                         </div>
                     </div>
                     <div className='WeaponStatsColumn'>
@@ -112,7 +132,7 @@ const Weapons = () =>{
                             CT
                         </div>
                         <div className='WeaponStatsCheck'>
-                            3+
+                            {weapon.C_T}
                         </div>
                     </div>
                     <div className='WeaponStatsColumn'>
@@ -120,7 +140,7 @@ const Weapons = () =>{
                             S
                         </div>
                         <div className='WeaponStatsCheck'>
-                            3
+                        {weapon.force}
                         </div>
                     </div>
                     <div className='WeaponStatsColumn'>
@@ -128,7 +148,7 @@ const Weapons = () =>{
                             AP
                         </div>
                         <div className='WeaponStatsCheck'>
-                            -3
+                        {weapon.PA}
                         </div>
                     </div>
                     <div className='WeaponStatsColumn'>
@@ -136,14 +156,16 @@ const Weapons = () =>{
                             D
                         </div>
                         <div className='WeaponStatsCheck'>
-                            1
+                        {weapon.degats}
                         </div>
                     </div>
                 </div>
                 <ul className='WeaponAbilities'>
-                    <li className='WeaponAbility'>Torrent</li>
-                    <li className='WeaponAbility'>Torrent</li>
-                    <li className='WeaponAbility'>Torrent</li>
+                    {
+                        weapon.capacites.map((capacity)=>(
+                            <li className='WeaponAbility'>capacity</li>
+                        ))
+                    }
                 </ul>
             </div>
         </div>
