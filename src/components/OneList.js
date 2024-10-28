@@ -6,12 +6,29 @@ import { useState } from "react";
 import UnitDisplay from "../components/UnitDisplay"
 
 const OneList = (props) => {
+
     const HandleBack = props.HandleBack;
-    const selectedList = props.selectedList;
-    console.log("Onelist", props);
+    const selectedList = props.list;
+    const units = props.list.units;
+    const listsPoints = selectedList.units.reduce((total, unit) => {
+        // Vérifier si une figurine est sélectionnée
+        const selectedFigurines = unit.figurines.filter(figurine => figurine.selected);
+        // Calculer les points basés sur la figurine sélectionnée
+        selectedFigurines.forEach(figurine => {
+            const figurineCount = figurine; // Supposons que figurine contient la valeur (10 ou 20)
+            // Trouver l'index correspondant à cette figurine pour récupérer les points
+            const index = unit.figurines.indexOf(figurineCount);
+            if (index !== -1) {
+                total += unit.points[index]; // Ajouter les points correspondants
+            }
+        });
+
+        return total; // Retourner le total accumulé
+    }, 0);
 
     const [selectedUnit,setSelectedUnit] = useState(null);
     const [showRules, setShowRules] = useState(null);
+
 
     function HandleSelectUnit(unit){
         if(unit)
@@ -28,10 +45,9 @@ const OneList = (props) => {
 
     return (
         <div className="OneList">
-
             {
                 showRules ?
-                <Rules HandleShowRules={HandleShowRules} showRules = {showRules}/>
+                <Rules HandleShowRules={HandleShowRules} selectedList = {selectedList}/>
                 :
                 <>
                                 {
@@ -41,70 +57,185 @@ const OneList = (props) => {
                     <button className="BackButton" onClick={HandleBack}>
                         <FontAwesomeIcon icon={faArrowLeft} />
                     </button>
-                    <h3 className="ListName">ListName</h3>
+                    <h3 className="ListName">{selectedList.name}</h3>
+                    <button className="BackButtonH">
+                        <FontAwesomeIcon icon={faArrowLeft} />
+                    </button>
                 </div>
                 <div className="ListActions">
                     <button className="ListRules" onClick={()=>{HandleShowRules("rules")}}>Rules</button>
-                    <p className="ListPoints">1000</p>
+                    <p className="ListPoints">{listsPoints} points</p>
                     <button className="AddUnit">Add</button>
                 </div>
                 <div className="ListUnits">
-                    <section className="PersonnageSection">
-                        <h3 className="TitleSection">Personnage</h3>
-                        <div className="Unit" onClick={() => HandleSelectUnit(1)}>
-                            <div className="LeftUnit">
-                                <p className="Itération">1</p>
-                                <p className="UnitName">Nom</p>
-                            </div>
-                            <p className="UnitPoints">Points</p>
-                        </div>
-                    </section>
-                    <section className="LigneSection">
-                    <h3 className="TitleSection">Ligne</h3>
-                    <div className="Unit">
-                        <div className="LeftUnit">
-                            <p className="Itération">1</p>
-                            <p className="UnitName">Nom</p>
-                        </div>
-                        <p className="UnitPoints">Points</p>
-                    </div>
-                    </section>
-                    <section className="InfantrySection">
-                        <h3 className="TitleSection">Infantrie</h3>
-                        <div className="Unit">
-                            <div className="LeftUnit">
-                                <p className="Itération">1</p>
-                                <p className="UnitName">Nom</p>
-                            </div>
-                            <p className="UnitPoints">Points</p>
-                        </div>
+                    {
+                        units && units.some(unit => unit.type === "Caracter") ? (
+                            <section className="PersonnageSection">
+                                <h3 className="TitleSection">Caracter</h3>
+                                {
+                                    units.map((unit) => (
+                                        unit.type === "Caracter" &&
+                                        <div className="Unit" onClick={() => HandleSelectUnit(1)}>
+                                            {
+                                                unit.figurines[0].selected === true ?
+                                                <>
+                                                    <div className="LeftUnit">
+                                                        <p className="Itération">{unit.figurines[0].count}</p>
+                                                        <p className="UnitName">{unit.unite}</p>
+                                                    </div>
+                                                    <p className="UnitPoints">{unit.points[0]} points</p>
+                                                </>
+                                                :
+                                                <>
+                                                    <div className="LeftUnit">
+                                                        <p className="Itération">{unit.figurines[1].count}</p>
+                                                        <p className="UnitName">{unit.unite}</p>
+                                                    </div>
+                                                    <p className="UnitPoints">{unit.points[1]} points</p>
+                                                </>
+                                            }
+                                        </div>
+                                    ))
+                                }
+                            </section>
+                        ) : null
+                    }
 
-                    </section>
-                    <section className="VehiculesSection">
-                    <h3 className="TitleSection">Véhicule</h3>
-                    <div className="Unit">
-                        <div className="LeftUnit">
-                            <p className="Itération">1</p>
-                            <p className="UnitName">Nom</p>
-                        </div>
-                        <p className="UnitPoints">Points</p>
-                    </div>
+                    {
+                        units && units.some(unit => unit.type === "Line") ? (
+                            <section className="PersonnageSection">
+                                <h3 className="TitleSection">Line</h3>
+                                {
+                                    units.map((unit) => (
+                                        unit.type === "Line" &&
+                                        <div className="Unit" onClick={() => HandleSelectUnit(1)}>
+                                            {
+                                                unit.figurines[0].selected === true ?
+                                                <>
+                                                    <div className="LeftUnit">
+                                                        <p className="Itération">{unit.figurines[0].count}</p>
+                                                        <p className="UnitName">{unit.unite}</p>
+                                                    </div>
+                                                    <p className="UnitPoints">{unit.points[0]}</p>
+                                                </>
+                                                :
+                                                <>
+                                                    <div className="LeftUnit">
+                                                        <p className="Itération">{unit.figurines[1].count}</p>
+                                                        <p className="UnitName">{unit.unite}</p>
+                                                    </div>
+                                                    <p className="UnitPoints">{unit.points[1]} points</p>
+                                                </>
+                                            }
+                                        </div>
+                                    ))
+                                }
+                            </section>
+                        ) : null
+                    }
 
-                    </section>
-                    <section className="MonstresSection">
-                    <h3 className="TitleSection">Monstre</h3>
-                    <div className="Unit">
-                        <div className="LeftUnit">
-                            <p className="Itération">1</p>
-                            <p className="UnitName">Nom</p>
-                        </div>
-                        <p className="UnitPoints">Points</p>
-                    </div>
-                    </section>
+                    {
+                        units && units.some(unit => unit.type === "Infantry") ? (
+                            <section className="PersonnageSection">
+                                <h3 className="TitleSection">Infantry</h3>
+                                {
+                                    units.map((unit) => (
+                                        unit.type === "Infantry" &&
+                                        <div className="Unit" onClick={() => HandleSelectUnit(1)}>
+                                            {
+                                                unit.figurines[0].selected === true ?
+                                                <>
+                                                    <div className="LeftUnit">
+                                                        <p className="Itération">{unit.figurines[0].count}</p>
+                                                        <p className="UnitName">{unit.unite}</p>
+                                                    </div>
+                                                    <p className="UnitPoints">{unit.points[0]} points</p>
+                                                </>
+                                                :
+                                                <>
+                                                    <div className="LeftUnit">
+                                                        <p className="Itération">{unit.figurines[1].count}</p>
+                                                        <p className="UnitName">{unit.unite}</p>
+                                                    </div>
+                                                    <p className="UnitPoints">{unit.points[1]} points</p>
+                                                </>
+                                            }
+                                        </div>
+                                    ))
+                                }
+                            </section>
+                        ) : null
+                    }
+
+                    {
+                        units && units.some(unit => unit.type === "Vehicule") ? (
+                            <section className="PersonnageSection">
+                                <h3 className="TitleSection">Caracter</h3>
+                                {
+                                    units.map((unit) => (
+                                        unit.type === "Vehicule" &&
+                                        <div className="Unit" onClick={() => HandleSelectUnit(1)}>
+                                            {
+                                                unit.figurines[0].selected === true ?
+                                                <>
+                                                    <div className="LeftUnit">
+                                                        <p className="Itération">{unit.figurines[0].count}</p>
+                                                        <p className="UnitName">{unit.unite}</p>
+                                                    </div>
+                                                    <p className="UnitPoints">{unit.points[0]}</p>
+                                                </>
+                                                :
+                                                <>
+                                                    <div className="LeftUnit">
+                                                        <p className="Itération">{unit.figurines[1].count}</p>
+                                                        <p className="UnitName">{unit.unite}</p>
+                                                    </div>
+                                                    <p className="UnitPoints">{unit.points[1]} points</p>
+                                                </>
+                                            }
+                                        </div>
+                                    ))
+                                }
+                            </section>
+                        ) : null
+                    }
+
+                    {
+                        units && units.some(unit => unit.type === "Monster") ? (
+                            <section className="PersonnageSection">
+                                <h3 className="TitleSection">Monster</h3>
+                                {
+                                    units.map((unit) => (
+                                        unit.type === "Monster" &&
+                                        <div className="Unit" onClick={() => HandleSelectUnit(1)}>
+                                            {
+                                                unit.figurines[0].selected === true ?
+                                                <>
+                                                    <div className="LeftUnit">
+                                                        <p className="Itération">{unit.figurines[0].count}</p>
+                                                        <p className="UnitName">{unit.unite}</p>
+                                                    </div>
+                                                    <p className="UnitPoints">{unit.points[0]}</p>
+                                                </>
+                                                :
+                                                <>
+                                                    <div className="LeftUnit">
+                                                        <p className="Itération">{unit.figurines[1].count}</p>
+                                                        <p className="UnitName">{unit.unite}</p>
+                                                    </div>
+                                                    <p className="UnitPoints">{unit.points[1]} points</p>
+                                                </>
+                                            }
+                                        </div>
+                                    ))
+                                }
+                            </section>
+                        ) : null
+                    }
                 </div>
                 </>
                 :
-                <UnitDisplay HandleUnSelectUnit={HandleUnSelectUnit} unit = {selectedUnit}/>
+                    <UnitDisplay HandleUnSelectUnit={HandleUnSelectUnit} unit = {selectedUnit}/>
                 }
                 </>
             }
@@ -119,7 +250,9 @@ export default OneList;
 const Rules = (props) => {
 
     const HandleShowRules = props.HandleShowRules;
-    const showRules = props.showRules;
+    const selectedList = props.selectedList;
+
+    console.log('Rules',selectedList.detachments[0].rules);
 
     return (
         <div className="Rules">
@@ -128,11 +261,17 @@ const Rules = (props) => {
             </button>
             <div className="ArmyRules">
                 <h2 className="ArmyRulesTitle">ArmyRules</h2>
-                <p> bla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabal</p>
+                <p>{selectedList.armyRules}</p>
             </div>
             <div className="DetachmentRules">
-                <h2 className="DetachmentsRulesTitle">Det Rules</h2>
-                <p> bla blabal bla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabalbla blabal</p>
+                <h2 className="DetachmentsRulesTitle">{selectedList.detachments[0].name}</h2>
+                <p>{selectedList.detachments[0].rules}</p>
+            </div>
+            <div className="Stratagèmes">
+
+            </div>
+            <div className="Optimisations">
+
             </div>
         </div>
     )

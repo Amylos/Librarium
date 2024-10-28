@@ -5,26 +5,25 @@ import OneList from "./OneList";
 import '../styles/UserLists.css';
 
 const UserLists = (props) => {
+    const userData = props.userData;
 
     const [selectedList, setSelectedList] = useState(null);
-    
-    const lists = [
-        {
-            "author":"Andrew",
-            "points":1000,
-            "faction":"Tyranides"
-        },
-        {
-            "author":"Andrew",
-            "points":1000,
-            "faction":"Tyranides"
-        },
-        {
-            "author":"Andrew",
-            "points":1000,
-            "faction":"Tyranides"
+    const [userLists, setUserLists] = useState(null);
+
+    const GetUserLists = async () => {
+        try {
+          const response = await fetch(`http://localhost:3001/lists/${userData.id}`); // Remplacez l'URL par celle de votre API
+          const json = await response.json();
+          setUserLists(json);
+        } catch (error) {
+          console.error(error);
         }
-    ]
+    };
+
+    useEffect(()=>{
+        GetUserLists();
+    },[]);
+
 
     const HandleClick = (list) => {
         setSelectedList(list);
@@ -46,9 +45,11 @@ const UserLists = (props) => {
                         </div>
                         <div className="Section">
                             {
-                                lists.map((list)=>(
+                                userLists ?
+                                userLists.map((list)=>(
                                     <ArmyList HandleClick={HandleClick} list = {list}/>
                                 ))
+                                : null
                             }
                         </div>
                         <div className="Footer"></div>

@@ -53,7 +53,7 @@ function App() {
 
     const components = {
         main: <Main setComponentToDisplay = {setComponentToDisplay} triggerPopUp={triggerPopUp}/>,
-        UserLists: <UserLists setComponentToDisplay = {setComponentToDisplay} triggerPopUp={triggerPopUp}/>,
+        UserLists: <UserLists setComponentToDisplay = {setComponentToDisplay} triggerPopUp={triggerPopUp}  userData = {userData}/>,
         ListMaker: <ListMaker setComponentToDisplay = {setComponentToDisplay} triggerPopUp={triggerPopUp} userData={userData}/>,
         Login: <Login setComponentToDisplay = {setComponentToDisplay} userData = {userData} setUserData = {setUserData} triggerPopUp={triggerPopUp}/>,
         Register : <Register setComponentToDisplay = {setComponentToDisplay} triggerPopUp={triggerPopUp}/>,

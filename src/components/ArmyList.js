@@ -4,30 +4,43 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const ArmyList = (props) =>{
 
-    const points = props.points;
-    const army = props.army;
-    const name = props.name;
-    const author = props.author;
-
     const list = props.list;
+    const listsPoints = list.units.reduce((total, unit) => {
+        // Vérifier si une figurine est sélectionnée
+        const selectedFigurines = unit.figurines.filter(figurine => figurine.selected);
+    
+        // Calculer les points basés sur la figurine sélectionnée
+        selectedFigurines.forEach(figurine => {
+            const figurineCount = figurine; // Supposons que figurine contient la valeur (10 ou 20)
+            
+            // Trouver l'index correspondant à cette figurine pour récupérer les points
+            const index = unit.figurines.indexOf(figurineCount);
+            if (index !== -1) {
+                total += unit.points[index]; // Ajouter les points correspondants
+            }
+        });
+
+        return total; // Retourner le total accumulé
+    }, 0);
+
     const HandleClick = props.HandleClick;
 
     return(
         <div className="ArmyList" onClick={() => HandleClick(list)}>
             <div className="Left">
                 <div className="Faction">
-                    Faction
+                    {list.faction}
                 </div>
                 <div className="Points">
-                    2000 points
+                    {listsPoints} points
                 </div>
             </div>
             <div className="Center">
                 <div className="ArmyName">
-                    Army Name
+                    {list.name}
                 </div>
                 <div className="Author">
-                    Author
+                    {list.author}
                 </div>
             </div>
             <div className="Right">
