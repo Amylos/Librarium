@@ -10,7 +10,7 @@ const UnitDisplay = (props) => {
     const HandleUnSelectUnit = props.HandleUnSelectUnit;
     const unit = props.unit;
 
-    console.log(unit);
+    console.log('unit',unit);
     return (
         <div className="UnitDisplay">
             <div className='Unitsheader'>
@@ -84,14 +84,24 @@ const UnitDisplay = (props) => {
                 <h3 className='UnitNames'>Weapons</h3>
                         {
                             unit.armes.map((weapon) =>(
+                                weapon.selected === true ?
                                 <Weapons weapon = {weapon}/>
-
+                                : null
                             ))
                         }
 
                 <h3 className='UnitNames'>Abilities</h3>
-                <Abilities aptitudes = {unit.aptitudes} aptitudesBase = {unit.aptitudesBase}/>
-                <KeyWords/>
+                {
+                    unit.aptitudes.map((ability)=>(
+                        <Ability ability = {ability}/>
+                    ))
+                }
+                {/* {
+                    unit.aptitudes_base.map((ability)=>(
+                        <AbilityBase ability = {ability}/>
+                    ))
+                } */}
+                <KeyWords  keywords = {unit.mots_cles}/>
         </div>
     );
 };
@@ -104,7 +114,6 @@ export default UnitDisplay;
 const Weapons = (props) =>{
 
     const weapon = props.weapon;
-    console.log('weapon',weapon);
 
     return(
         <div className='Weapons'>
@@ -175,25 +184,45 @@ const Weapons = (props) =>{
 
 
 
-const Abilities = () =>{
+const Ability = (props) =>{
+
+    const ability = props.ability;
     return(
-        <div className='Abilities'>
+        <div className='Ability'>
             <div className='Ability'>
-                    <h5 className='AbilityName'>Torrent</h5>
-                    <p className='AbilityDescription'>nfsdjknsmjkfn fnsdlmfn flsdnflsdnf slfnsf nslfnmfnsfnsfknsdkl fnsdlkfn slfnsflsnfdlsfndslkfnsdlkfns klfnflksn flksdf</p>
+                    <h5 className='AbilityName'>{ability.name}</h5>
+                    <p className='AbilityDescription'>{ability.description}</p>
             </div>
         </div>
     )
 }
 
 
-const KeyWords = () =>{
+const AbilityBase = (props) =>{
+
+    const ability = props.ability;
+    return(
+        <div className='Ability'>
+            <div className='Ability'>
+                    <h5 className='AbilityName'>{ability.name}</h5>
+                    <p className='AbilityDescription'>{ability.description}</p>
+            </div>
+        </div>
+    )
+}
+
+
+const KeyWords = (props) =>{
+
+    const keywords = props.keywords;
+    console.log(keywords)
+
     return(
         <div className='KeyWords'>
             <ul>
-                <li>Space marine</li>
-                <li>Space marine</li>
-                <li>Space marine</li>
+                {keywords.map((keyword)=>(
+                    <li>{keyword}</li>
+                ))}
             </ul>
         </div>
     )
