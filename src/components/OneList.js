@@ -13,22 +13,7 @@ const OneList = (props) => {
     const selectedList = props.list;
     const units = props.list.units;
 
-    const listsPoints = selectedList.units.reduce((total, unit) => {
-        // Vérifier si une figurine est sélectionnée
-        const selectedFigurines = unit.figurines.filter(figurine => figurine.selected);
-        // Calculer les points basés sur la figurine sélectionnée
-        selectedFigurines.forEach(figurine => {
-            const figurineCount = figurine; // Supposons que figurine contient la valeur (10 ou 20)
-            // Trouver l'index correspondant à cette figurine pour récupérer les points
-            const index = unit.figurines.indexOf(figurineCount);
-            if (index !== -1) {
-                total += unit.points[index]; // Ajouter les points correspondants
-            }
-        });
-
-        return total; // Retourner le total accumulé
-    }, 0);
-
+    const [listPoints, setListPoints] = useState(0);
     const [selectedUnit,setSelectedUnit] = useState(null);
     const [showRules, setShowRules] = useState(null);
     const [addUnits, setAddUnits] = useState(null);
@@ -77,7 +62,7 @@ const OneList = (props) => {
                 </div>
                 <div className="ListActions">
                     <button className="ListRules" onClick={()=>{HandleShowRules("rules")}}>Rules</button>
-                    <p className="ListPoints">{listsPoints} points</p>
+                    <p className="ListPoints">{listPoints} pts</p>
                     <button className="AddUnit" onClick={()=>{HandleAddUnit()}}>Add</button>
                 </div>
                 <div className="ListUnits">
@@ -267,7 +252,10 @@ const Rules = (props) => {
     const HandleShowRules = props.HandleShowRules;
     const selectedList = props.selectedList;
 
-    console.log('Rules',selectedList.detachments[0].rules);
+    const DetachmentRulesName =  props.selectedList.detachments.rules.rule_name;
+    const DetachmentRulesDescription = props.selectedList.detachments.rules.description;
+
+    console.log('Rules',selectedList.detachments.rules);
 
     return (
         <div className="Rules">
@@ -279,8 +267,8 @@ const Rules = (props) => {
                 <p>{selectedList.armyRules}</p>
             </div>
             <div className="DetachmentRules">
-                <h2 className="DetachmentsRulesTitle">{selectedList.detachments[0].name}</h2>
-                <p>{selectedList.detachments[0].rules}</p>
+                <h2 className="DetachmentsRulesTitle">{DetachmentRulesName}</h2>
+                <p>{DetachmentRulesDescription}</p>
             </div>
             <div className="Stratagèmes">
 

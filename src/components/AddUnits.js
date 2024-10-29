@@ -30,15 +30,31 @@ const AddUnits = (props) => {
         }
     }
 
-    async function AddUnitsToUserList(unit){
+    async function AddUnitsToUserList(unit) {
+        try {
+            const { _id } = selectedList; // Récupérer uniquement l'_id de la liste
+            selectedList.units.push(unit);
 
-        try{
+            // Faire une requête PUT pour mettre à jour la liste avec l'unité
+            const response = await fetch(`http://localhost:3001/lists/${_id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({selectedList}) // Envoyer l'unité et l'ID de la liste
+            });
 
-        }
-        catch(err){
-            console.log(err);
+            if (!response.ok) {
+                throw new Error('Échec de la mise à jour de la liste');
+            }
+
+            const data = await response.json();
+            console.log("Liste mise à jour:", data);
+        } catch (err) {
+            console.error("Erreur:", err);
         }
     }
+
 
 
     useEffect(()=>{

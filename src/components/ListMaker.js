@@ -17,12 +17,10 @@ const ListMaker = (props) =>{
         { name: "Xenos" },
         { name: "Chaos" }
     ];
-    
 
     const [armies,setArmies] = useState(null);
     const [detachments,setDetachments] = useState(null);
 
-    
     useEffect(()=>{
 
         GetArmies();
@@ -75,6 +73,7 @@ const ListMaker = (props) =>{
     }
 
     async function CreateList() {
+
         try {
             const response = await fetch('http://localhost:3001/lists', {
                 method: 'POST',
@@ -87,10 +86,11 @@ const ListMaker = (props) =>{
                     name:name,
                     faction:selectedFaction,
                     army:selectedRace,
+                    armyRules: selectedRules,
                     points:format,
                     unitsNumber:0,
                     figurinesNumber:0,
-                    detachments:selectedDetachement
+                    detachments: selectedDetachement
                 })
             });
             if (!response.ok) {
@@ -118,6 +118,7 @@ const ListMaker = (props) =>{
     const [selectedFaction, setSelectedFaction] = useState('');
     const [selectedRace, setSelectedRace] = useState('');
     const [selectedDetachement, setSelectedDetachement] = useState('');
+    const [selectedRules, setSelectedRules] = useState('');
 
     const HandleChangeFormat = () =>{
         if(format){
@@ -133,7 +134,8 @@ const ListMaker = (props) =>{
         setSectionToShow('RaceList'); // Aller à la sélection des races
     };
 
-    const handleRaceChange = (raceName) => {
+    const handleRaceChange = (raceName, raceRules) => {
+        setSelectedRules(raceRules);
         setSelectedRace(raceName);
         setSectionToShow('DetachementList'); // Aller à la sélection des détachements après avoir sélectionné la race
     };
@@ -147,8 +149,8 @@ const ListMaker = (props) =>{
         console.log("Faction : ",selectedFaction);
         console.log("Army : ", selectedRace );
         console.log("Detachment : ",detachment);
-
     };
+
 
     const ChangeFaction = () =>{
         setSectionToShow('FactionList');
@@ -214,7 +216,7 @@ const ListMaker = (props) =>{
                     <ul className="RaceList" style={{ display: sectionToShow === "RaceList" && format ? 'flex' : 'none'}}>
                         {selectedFaction && armies && armies.map((army,index) => (
                             selectedFaction === army.faction ? (
-                                <li key={index} value={army.name} role='button' onClick={() => {handleRaceChange(army.name)}}>
+                                <li key={index} value={army.name} role='button' onClick={() => {handleRaceChange(army.name,army.rules)}}>
                                     {army.name}
                                 </li>
                             ) : null
@@ -238,3 +240,67 @@ const ListMaker = (props) =>{
 }
 
 export default ListMaker;
+
+
+
+
+// {
+//     "name": selectedDetachement.name,
+//     "faction": selectedDetachement.faction,
+//     "army": selectedDetachement.army,
+//     "rules": selectedDetachement.rules,
+//     "optimisations": [
+//       {
+//         "option_name": selectedDetachement.optimisations[0].option_name,
+//         "description":  selectedDetachement.optimisations[0].description,
+//         "cost": selectedDetachement.optimisations[0].cost
+//       },
+//       {
+//         "option_name": selectedDetachement.optimisations[1].option_name,
+//         "description":  selectedDetachement.optimisations[1].description,
+//         "cost": selectedDetachement.optimisations[1].cost
+//       },
+//       {
+//         "option_name": selectedDetachement.optimisations[2].option_name,
+//         "description":  selectedDetachement.optimisations[2].description,
+//         "cost": selectedDetachement.optimisations[2].cost
+//       },
+//       {
+//         "option_name": selectedDetachement.optimisations[3].option_name,
+//         "description":  selectedDetachement.optimisations[3].description,
+//         "cost": selectedDetachement.optimisations[3].cost
+//       }
+//     ],
+//     "stratagems": [
+//       {
+//         "stratagem_name": selectedDetachement.stratagems[0].stratagem_name,
+//         "cost": selectedDetachement.stratagems[0].cost,
+//         "description": selectedDetachement.stratagems[0].description
+//       },
+//       {
+//         "stratagem_name": selectedDetachement.stratagems[1].stratagem_name,
+//         "cost": selectedDetachement.stratagems[1].cost,
+//         "description": selectedDetachement.stratagems[1].description
+//       },
+//       {
+//         "stratagem_name": selectedDetachement.stratagems[2].stratagem_name,
+//         "cost": selectedDetachement.stratagems[2].cost,
+//         "description": selectedDetachement.stratagems[2].description
+//       },
+//       {
+//         "stratagem_name": selectedDetachement.stratagems[3].stratagem_name,
+//         "cost": selectedDetachement.stratagems[3].cost,
+//         "description": selectedDetachement.stratagems[3].description
+//       },
+//       {
+//         "stratagem_name": selectedDetachement.stratagems[4].stratagem_name,
+//         "cost": selectedDetachement.stratagems[4].cost,
+//         "description": selectedDetachement.stratagems[4].description
+//       },
+//       {
+//         "stratagem_name": selectedDetachement.stratagems[5].stratagem_name,
+//         "cost": selectedDetachement.stratagems[5].cost,
+//         "description": selectedDetachement.stratagems[5].description
+//       }
+//     ]
+//   }
